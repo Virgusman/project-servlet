@@ -45,7 +45,6 @@
                 <version>2.2</version>
                 <configuration>
                     <port>8888</port>
-                    <url>http://localhost:8888/start</url>
                     <path>/</path>
                 </configuration>
             </plugin>

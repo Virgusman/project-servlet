@@ -1,12 +1,12 @@
 package com.tictactoe;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.security.SecureRandom;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Field {
     private final Map<Integer, Sign> field;
+    private final SecureRandom random = new SecureRandom();
 
     public Field() {
         field = new HashMap<>();
@@ -26,10 +26,14 @@ public class Field {
     }
 
     public int getEmptyFieldIndex() {
-        return field.entrySet().stream()
+        List<Integer> fields = field.entrySet().stream()
                 .filter(e -> e.getValue() == Sign.EMPTY)
-                .map(Map.Entry::getKey)
-                .findFirst().orElse(-1);
+                .map(Map.Entry::getKey).collect(Collectors.toList());
+        if (fields.isEmpty()) {
+            return -1;
+        } else {
+            return fields.get(random.nextInt(fields.size()));
+        }
     }
 
     public List<Sign> getFieldData() {
@@ -53,8 +57,8 @@ public class Field {
 
         for (List<Integer> winPossibility : winPossibilities) {
             if (field.get(winPossibility.get(0)) == field.get(winPossibility.get(1))
-                && field.get(winPossibility.get(0)) == field.get(winPossibility.get(2))
-                    && field.get(winPossibility.get(1)) == field.get(winPossibility.get(2))){
+                    && field.get(winPossibility.get(0)) == field.get(winPossibility.get(2))
+                    && field.get(winPossibility.get(1)) == field.get(winPossibility.get(2))) {
                 return field.get(winPossibility.get(0));
             }
         }
