@@ -12,6 +12,8 @@
 </head>
 <body>
 <h1>Tic-Tac-Toe</h1>
+<a href="http://localhost:8888/tags">Game TAGS</a>
+<br>
 <table>
 	<tr>
             <td onclick="window.location='/logic?click=0'">${data.get(0).getSign()}</td>
